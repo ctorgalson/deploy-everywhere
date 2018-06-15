@@ -1,0 +1,37 @@
+VAGRANTFILE_API_VERSION = "2"
+
+unless Vagrant.has_plugin?("vagrant-hostsupdater")
+  raise "This project requires the `vagrant-hostsupdater` plugin (https://git.io/vNhwP)!"
+end
+
+Vagrant.configure(VAGRANTFILE_API_VERSION) do |config|
+  # Dev host.
+  config.vm.define "dev" do |dev|
+    dev.vm.box = "ubuntu/xenial64"
+    dev.vm.network :private_network, ip: "192.168.101.202"
+    dev.vm.hostname = "dev-01.deploy.local"
+    dev.vm.synced_folder "../site/docroot/", "/var/www/dev-01.deploy.local/docroot",
+      id: "site",
+      mount_options: ["dmode=755,fmode=644"]
+  end
+
+  # Prod host.
+  config.vm.define "prod" do |prod|
+    prod.vm.box = "ubuntu/xenial64"
+    prod.vm.network :private_network, ip: "172.31.79.50"
+    prod.vm.hostname = "prod-01.deploy.local"
+  end
+
+  # Auto-provision the dev box only (since we're pretending Prod is elsewhere).
+  config.vm.provision "ansible" do |ansible|
+    ansible.galaxy_command = "ansible-galaxy install --role-file=%{role_file} --roles-path=%{roles_path} --force"
+    ansible.galaxy_role_file = "requirements.yml"
+    ansible.groups = {
+      "deploy_dev" => ["dev"],
+    }
+    ansible.host_key_checking = false
+    ansible.playbook = "deployment.yml"
+    ansible.verbose = ENV['VAV'] ? ENV['VAV'] : false
+    ansible.tags = ENV['VAT'] ? ENV['VAT'] : false
+  end
+end
