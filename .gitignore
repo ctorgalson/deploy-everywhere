@@ -1,4 +1,5 @@
 .deploy-vault
 app.css
 index.html
+node_modules
 roles
