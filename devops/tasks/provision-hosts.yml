@@ -1,0 +1,40 @@
+---
+# Host provisioning related tasks.
+
+- name: Install required packages.
+  apt:
+    name: "{{ item }}"
+  with_items: "{{ app_packages | default([]) }}"
+
+- name: Create vhost directory.
+  block:
+    - name: Create docroot directory and remove default html directory.
+      file:
+        path: "{{ item.path }}"
+        state: "{{ item.state }}"
+        owner: "{{ app_user | default(omit) }}"
+        group: "{{ app_user | default(omit) }}"
+        mode: "{{ item.mode | default(omit) }}"
+      with_items:
+        - path: "{{ app_vhost_dir }}"
+          state: "directory"
+          owner: "{{ app_user }}"
+          group: "{{ app_user }}"
+          mode: "u=rwx,go=rx"
+        - path: "/var/www/html"
+          state: "absent"
+
+- name: Install and configure Apache webserver.
+  include_role:
+    name: "geerlingguy.apache"
+
+- name: Password-protect the QA site.
+  htpasswd:
+    path: "/etc/apache2/.htpasswd"
+    name: "{{ app_htpasswd_name }}"
+    password: "{{ app_htpasswd_password }}"
+    owner: "root"
+    group: "{{ app_apache_user }}"
+    mode: "u=rw,g=r,o="
+  when:
+    - app_htpasswd_authname is defined
