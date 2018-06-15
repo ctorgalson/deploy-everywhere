@@ -1,0 +1,23 @@
+---
+# Vars for deploy_dev group hosts.
+
+app_hostname: "dev-01.deploy.local"
+app_packages:
+  - "python-passlib"
+app_htpasswd_authname: "Please log in..."
+app_htpasswd_name: "deploy-dev"
+app_htpasswd_password: "depl0y"
+
+# Connection vars.
+ansible_ssh_private_key_file: "{{ playbook_dir }}/.vagrant/machines/dev/virtualbox/private_key"
+
+# geerlingguy.apache vars.
+app_apache_extra_parameters: |
+      Header set X-Robots-Tag "noindex, nofollow"
+
+      <Directory "{{ app_vhost_dir }}/{{ app_docroot_dir }}">
+        AuthType Basic
+        AuthName "{{ app_htpasswd_authname }}"
+        AuthUserFile /etc/apache2/.htpasswd
+        Require valid-user
+      </Directory>

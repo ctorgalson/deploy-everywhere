@@ -1,0 +1,22 @@
+---
+# Vars common to all host groups.
+# Connection vars.
+ansible_ssh_user: "ubuntu"
+
+app_user: "{{ ansible_ssh_user }}"
+app_apache_user: "www-data"
+app_docroot_dir: "docroot"
+app_vhost_dir: "/var/www/{{ app_hostname }}"
+
+# geerlingguy.apache vars.
+apache_remove_default_vhost: true
+apache_mods_enabled:
+  - headers.load
+apache_vhosts:
+  - servername: "{{ app_hostname }}"
+    documentroot: "{{ app_vhost_dir }}/{{ app_docroot_dir }}"
+    extra_parameters: |
+      {{ app_apache_extra_parameters | default('') }}
+
+      ErrorLog ${APACHE_LOG_DIR}/error.log
+      CustomLog ${APACHE_LOG_DIR}/access.log combined
