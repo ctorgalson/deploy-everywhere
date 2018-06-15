@@ -1,0 +1,10 @@
+- .DS_Store
+- /.rsync-filter
+- /docroot/.editorconfig
+- /docroot/.gitattributes
+- /docroot/.gitignore
+- /docroot/doc
+- /docroot/node_modules
+- /docroot/package-lock.json
+- /docroot/package.json
+- /docroot/src

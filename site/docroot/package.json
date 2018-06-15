@@ -1,0 +1,19 @@
+{
+  "name": "build-tasks",
+  "version": "1.0.0",
+  "description": "Runs build tasks on Deploy Everywhere demo.",
+  "main": "gulpfile.js",
+  "directories": {
+    "doc": "doc"
+  },
+  "dependencies": {},
+  "devDependencies": {
+    "gulp": "^3.9.1",
+    "gulp-sass": "^4.0.1"
+  },
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "Christopher Torgalson",
+  "license": "GPL-2.0"
+}
