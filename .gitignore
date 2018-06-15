@@ -1,4 +1,5 @@
 .deploy-vault
+.vagrant
 *.log
 app.css
 index.html
