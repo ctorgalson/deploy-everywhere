@@ -1,0 +1,43 @@
+---
+# Setup hosts for Ansible provisioning.
+- name: Verify minimal requirements on hosts.
+  hosts:
+    - deploy_dev
+    - deploy_prod
+  gather_facts: false
+  become: true
+  tags:
+    - setup
+    - provision
+
+  tasks:
+    - name: Run preliminary tasks.
+      include_tasks: "tasks/prepare-hosts.yml"
+
+# Provision application environment on hosts.
+- name: Provision hosts.
+  hosts:
+    - deploy_dev
+    - deploy_prod
+  gather_facts: true
+  become: true
+  tags:
+    - provision
+
+  tasks:
+    - name: Run server provisioning tasks.
+      include_tasks: "tasks/provision-hosts.yml"
+
+# Deploy application to hosts.
+- name: Deploy application.
+  hosts:
+    - deploy_dev
+    - deploy_prod
+  gather_facts: true
+  become: true
+  tags:
+    - deploy
+
+  tasks:
+    - name: Run application deployment tasks.
+      include_tasks: "tasks/deploy-app.yml"
