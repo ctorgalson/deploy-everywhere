@@ -31,3 +31,24 @@
     - "find . -type f -exec chmod 644 {} \\;"
   changed_when: false
   become: true
+
+- name: Perform a minimal deployment test.
+  block:
+    - name: Download the index page from the local machine.
+      get_url:
+        url: "http://{{ app_hostname }}"
+        dest: "/tmp/index.{{ ansible_date_time.iso8601 }}.html"
+        url_username: "{{ app_htpasswd_name | default(omit) }}"
+        url_password: "{{ app_htpasswd_password | default(omit) }}"
+      register: response
+      delegate_to: localhost
+
+    - assert:
+        that:
+          - "response.status_code == 200"
+        msg: "The homepage could not be reached."
+
+    - assert:
+        that:
+          - "ansible_date_time.iso8601 in lookup('file', response.dest)"
+        msg: "The homepage does not contain a timestamp matching Ansible's."
