@@ -41,6 +41,7 @@
         url_username: "{{ app_htpasswd_name | default(omit) }}"
         url_password: "{{ app_htpasswd_password | default(omit) }}"
       register: response
+      changed_when: false
       delegate_to: localhost
 
     - assert:
