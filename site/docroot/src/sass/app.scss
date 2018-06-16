@@ -1,12 +1,17 @@
 @import "normalize.css";
 @import "main.css";
 
+$color_background: #09c;
+$color_white: #fff;
+$color_prod: #fc0;
+$color_dev: #090;
+
 html {
   height: 100%;
 }
 
 body {
-  background: #09c;
+  background: $color_background;
   display: flex;
   justify-content: center;
   align-items: center;
@@ -15,9 +20,10 @@ body {
 }
 
 h1 {
-  border: 3px solid #fff;
+  border: 3px solid $color_white;
   border-radius: 9px;
-  color: #fff;
+  box-shadow: 0 5px 10px 0 rgba(darken($color_background, 20%), 0.50);
+  color: $color_white;
 	font-size: 24px;
 	font-style: normal;
 	font-variant: normal;
@@ -35,10 +41,12 @@ h1 {
   }
 
   .dev-site & {
-    background: #090;
+    background: $color_dev;
+    text-shadow: 0px 2px 2px rgba(darken($color_dev, 15%), 0.5);
   }
 
   .prod-site & {
-    background: #fc0;
+    background: $color_prod;
+    text-shadow: 0 2px 2px rgba(darken($color_prod, 15%), 0.5);
   }
 }
