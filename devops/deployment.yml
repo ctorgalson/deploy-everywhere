@@ -34,7 +34,6 @@
     - deploy_dev
     - deploy_prod
   gather_facts: true
-  become: true
   tags:
     - deploy
 
