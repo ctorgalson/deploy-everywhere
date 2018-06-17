@@ -26,7 +26,7 @@ body {
   color: $color_white;
   display: grid;
   grid-template-columns: 100px auto;
-  grid-template-rows: 55px auto;
+  grid-template-rows: 50% 50%;
   padding: 0 1em 0 .25em;
   position: relative;
   top: -5%;
