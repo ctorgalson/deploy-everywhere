@@ -7,6 +7,7 @@
       stat:
         path: "../site/docroot/node_modules"
       register: node_modules
+      delegate_to: localhost
       changed_when: false
 
     - name: Install npm packages.
