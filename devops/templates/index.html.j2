@@ -20,11 +20,12 @@
     <p class="browserupgrade">You are using an <strong>outdated</strong> browser. Please <a href="https://browsehappy.com/">upgrade your browser</a> to improve your experience and security.</p>
   <![endif]-->
 
-  <!-- Add your site or application content here -->
-  <h1>
-    {{ app_hostname }}
-    <span>Last deployed: {{ ansible_date_time.iso8601 }}</span>
-  </h1>
+  <div class="content">
+    <h1 class="content__heading">{{ app_hostname }}</h1>
+    <span class="content__timestamp">Last deployed: {{ ansible_date_time.iso8601 }}</span>
+    <img class="content__logo" src="img/chromatic-mark-white-knockout.svg" alt="Chromatic HQ mark">
+  </div>
+
   <script src="js/vendor/modernizr-3.6.0.min.js"></script>
   <script src="js/plugins.js"></script>
   <script src="js/main.js"></script>
