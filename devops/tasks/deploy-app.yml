@@ -1,6 +1,21 @@
 ---
 # App deployment related tasks.
 
+- name: Ensure npm packages are installed.
+  block:
+    - name: Check for existence of node_modules directory.
+      stat:
+        path: "../site/docroot/node_modules"
+      register: node_modules
+      changed_when: false
+
+    - name: Install npm packages.
+      command: "npm install"
+      args:
+        chdir: "../site/docroot"
+      delegate_to: localhost
+      when: not node_modules.stat.exists
+
 - name: Run Gulp build.
   command: "gulp build"
   args:
