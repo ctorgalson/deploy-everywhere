@@ -1,7 +1,7 @@
 @import "normalize.css";
 @import "main.css";
 
-$color_background: #09c;
+$color_background: #309bd4;
 $color_white: #fff;
 $color_prod: #fc0;
 $color_dev: #090;
@@ -19,26 +19,17 @@ body {
   height: 100%;
 }
 
-h1 {
+.content {
   border: 3px solid $color_white;
   border-radius: 9px;
   box-shadow: 0 5px 10px 0 rgba(darken($color_background, 20%), 0.50);
   color: $color_white;
-	font-size: 24px;
-	font-style: normal;
-	font-variant: normal;
-	font-weight: 500;
-	line-height: 1;
-  padding: 1em;
-  text-align: center;
-
-  span {
-    display: block;
-    font-weight: 200;
-    font-size: 12px;
-    line-height: 1;
-    margin-top: 1em;
-  }
+  display: grid;
+  grid-template-columns: 100px auto;
+  grid-template-rows: 55px auto;
+  padding: 0 1em 0 .25em;
+  position: relative;
+  top: -5%;
 
   .dev-site & {
     background: $color_dev;
@@ -49,4 +40,28 @@ h1 {
     background: $color_prod;
     text-shadow: 0 2px 2px rgba(darken($color_prod, 15%), 0.5);
   }
+}
+
+.content__logo {
+  grid-column-start: 1;
+  grid-column-end: 1;
+  grid-row-start: 1;
+  grid-row-end: span 2;
+}
+
+.content__heading {
+  align-items: flex-end;
+  display: flex;
+  font-size: 24px;
+  font-style: normal;
+  font-variant: normal;
+  font-weight: 500;
+  line-height: 1;
+  margin: 0;
+}
+
+.content__timestamp {
+  font-weight: 200;
+  font-size: 12px;
+  line-height: 2;
 }
