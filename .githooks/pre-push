@@ -2,8 +2,6 @@
 
 set -e
 
-BASE=$PWD
-
 echo ""
 echo "Running test deployment to development server at dev-01.deploy.local..."
 echo ""
