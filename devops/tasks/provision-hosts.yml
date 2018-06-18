@@ -29,5 +29,4 @@
     owner: "root"
     group: "{{ app_apache_user }}"
     mode: "u=rw,g=r,o="
-  when:
-    - app_htpasswd_authname is defined
+  when: "'dev' in app_hostname"
