@@ -15,7 +15,4 @@ cd "$PWD/devops"
 # with `vagrant up --provision dev`.
 #
 # Assuming vagrant has _already_ been provisioned, this is pretty fast.
-ENV["VAV"]=v \
-ENV["VAT"]=deploy \
-ENV["VAL"]=deploy_dev \
-vagrant up --provision dev
+VAV="v" VAT="deploy" vagrant up --provision dev
