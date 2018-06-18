@@ -7,6 +7,12 @@ app_user: "{{ ansible_ssh_user }}"
 app_apache_user: "www-data"
 app_docroot_dir: "docroot"
 app_vhost_dir: "/var/www/{{ app_hostname }}"
+app_files:
+  - path: "{{ app_vhost_dir }}"
+    state: "directory"
+    owner: "{{ app_user }}"
+    group: "{{ app_user }}"
+    mode: "u=rwx,go=rx"
 
 # geerlingguy.apache vars.
 apache_remove_default_vhost: true

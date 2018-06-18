@@ -15,14 +15,7 @@
         owner: "{{ app_user | default(omit) }}"
         group: "{{ app_user | default(omit) }}"
         mode: "{{ item.mode | default(omit) }}"
-      with_items:
-        - path: "{{ app_vhost_dir }}"
-          state: "directory"
-          owner: "{{ app_user }}"
-          group: "{{ app_user }}"
-          mode: "u=rwx,go=rx"
-        - path: "/var/www/html"
-          state: "absent"
+      with_items: "{{ app_files }}"
 
 - name: Install and configure Apache webserver.
   include_role:
