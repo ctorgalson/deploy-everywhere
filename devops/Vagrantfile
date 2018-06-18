@@ -37,6 +37,5 @@ Vagrant.configure(VAGRANTFILE_API_VERSION) do |config|
     ansible.playbook = "deployment.yml"
     ansible.verbose = ENV["VAV"] ? ENV["VAV"] : false
     ansible.tags = ENV["VAT"] ? ENV["VAT"] : false
-    ansible.limit = ENV["VAL"] ? ENV["VAL"] : "all"
   end
 end
