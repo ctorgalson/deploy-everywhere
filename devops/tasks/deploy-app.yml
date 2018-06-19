@@ -18,7 +18,7 @@
       when: not node_modules.stat.exists
 
 - name: Run Gulp build.
-  command: "gulp build"
+  command: "npx gulp build"
   args:
     chdir: "../site/docroot"
   delegate_to: localhost
