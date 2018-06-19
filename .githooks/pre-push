@@ -8,9 +8,9 @@ echo ""
 cd "$PWD/devops"
 
 # Vagrant may not be running, and might not even be provisioned, so instead of
-# just `ansible-playbook deployment.yml -v --limit=deploy_dev --tags=deploy`,
+# just `ansible-playbook deployment.yml --limit=deploy_dev --tags=deploy`,
 # we set some environment vars for Vagrant and run provision and deployment
 # with `vagrant up --provision dev`.
 #
 # Assuming vagrant has _already_ been provisioned, this is pretty fast.
-VAV="v" VAT="deploy" vagrant up --provision dev
+VAT="deploy" vagrant up --provision dev
