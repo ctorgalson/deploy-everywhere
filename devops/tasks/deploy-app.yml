@@ -25,7 +25,7 @@
 
 - name: Rsync site files into place.
   synchronize:
-    src: "../site/"
+    src: "{{ playbook_dir | parent }}/site/"
     dest: "{{ app_vhost_dir }}/"
     private_key: "{{ ansible_ssh_private_key_file }}"
   when: "'prod' in app_hostname"
@@ -36,18 +36,6 @@
     dest: "{{ app_vhost_dir }}/{{ app_docroot_dir }}/index.html"
     owner: "{{ app_user }}"
     group: "{{ app_user }}"
-
-- name: Ensure file ownership and permissions are correct.
-  command: "{{ item }}"
-  args:
-    chdir: "{{ app_vhost_dir }}"
-    warn: false
-  with_items:
-    - "chown -R {{ app_user }}:{{ app_user }} ."
-    - "find . -type d -exec chmod 755 {} \\;"
-    - "find . -type f -exec chmod 644 {} \\;"
-  changed_when: false
-  become: true
 
 - name: Perform a minimal deployment test.
   block:
