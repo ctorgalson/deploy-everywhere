@@ -25,7 +25,7 @@
 
 - name: Rsync site files into place.
   synchronize:
-    src: "{{ playbook_dir | parent }}/site/"
+    src: "{{ playbook_dir | dirname }}/site/"
     dest: "{{ app_vhost_dir }}/"
     private_key: "{{ ansible_ssh_private_key_file }}"
   when: "'prod' in app_hostname"
