@@ -10,13 +10,13 @@ echo "deploy everywhere" > .deploy-vault
 echo ""
 echo "Booting, provisioning and deploying 'dev-01.deploy.local'..."
 echo ""
-vagrant up --provision dev
+vagrant up dev
 
 # Prod server relies on `ansible-playbook` for provisioning and deployment.
 echo ""
 echo "Booting, provisioning and deploying 'prod-01.deploy.local'..."
 echo ""
-vagrant up --provision prod
+vagrant up prod
 ansible-playbook deployment.yml --limit=deploy_prod
 
 echo "Deployment completed in $(ps -e -o etime $$ | sed -n '2p' | xargs)."
