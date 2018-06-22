@@ -1,16 +1,21 @@
-var gulp = require('gulp');
-var sass = require('gulp-sass');
+'use strict';
 
-gulp.task('sass', function() {
-  return gulp.src('./src/sass/**/*.scss')
-    .pipe(sass({
-      outputStyle: "compressed"
-    }).on('error', sass.logError))
-    .pipe(gulp.dest('./css'));
-});
+const autoprefixer = require('autoprefixer');
+const gulp = require('gulp');
+const postcss = require('gulp-postcss');
+const sass = require('gulp-sass');
+const sourcemaps = require('gulp-sourcemaps');
+const sassSrc = './src/sass/**/*.scss';
+const cssDest = './css'
 
-gulp.task('watch', function() {
-  gulp.watch('./src/sass/**/*.scss', ['sass']);
-});
+gulp.task('sass', () => gulp.src(sassSrc)
+  .pipe(sourcemaps.init())
+  .pipe(sass({outputStyle: 'compressed'})).on('error', sass.logError)
+  .pipe(postcss([autoprefixer()]))
+  .pipe(sourcemaps.write('.'))
+  .pipe(gulp.dest(cssDest))
+);
+
+gulp.task('watch', () => gulp.watch(sassSrc, ['sass']));
 
 gulp.task('build', ['sass']);

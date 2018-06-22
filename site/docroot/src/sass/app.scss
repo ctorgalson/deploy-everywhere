@@ -1,5 +1,5 @@
-@import "normalize.css";
-@import "main.css";
+@import "./normalize";
+@import "./main";
 
 $color_background: #309bd4;
 $color_white: #fff;
@@ -47,6 +47,7 @@ body {
   grid-column-end: 1;
   grid-row-start: 1;
   grid-row-end: span 2;
+  max-width: 100px;
 }
 
 .content__heading {
