@@ -10,11 +10,13 @@ end
 
 Vagrant.configure(VAGRANTFILE_API_VERSION) do |config|
   # Make sure Ansible tasks can run on all hosts.
-  config.vm.provision "shell", inline: "apt install -y python-minimal"
+  config.vm.provision "shell" do |sh|
+    sh.inline = "apt install -y python-minimal"
+  end
 
   # Dev host.
   config.vm.define "dev" do |dev|
-    dev.vm.box = "ubuntu/xenial64"
+    dev.vm.box = "bento/ubuntu-16.04"
     dev.vm.network :private_network, ip: "192.168.101.202"
     dev.vm.hostname = "dev-01.deploy.local"
 
@@ -39,7 +41,7 @@ Vagrant.configure(VAGRANTFILE_API_VERSION) do |config|
 
   # Prod host.
   config.vm.define "prod" do |prod|
-    prod.vm.box = "ubuntu/xenial64"
+    prod.vm.box = "bento/ubuntu-16.04"
     prod.vm.network :private_network, ip: "172.31.79.50"
     prod.vm.hostname = "prod-01.deploy.local"
   end

@@ -1,7 +1,7 @@
 ---
 # Vars common to all host groups.
 # Connection vars.
-ansible_ssh_user: "ubuntu"
+ansible_ssh_user: "vagrant"
 
 app_user: "{{ ansible_ssh_user }}"
 app_apache_user: "www-data"
