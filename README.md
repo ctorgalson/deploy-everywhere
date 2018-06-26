@@ -40,25 +40,46 @@ You may begin working immediately :)
 (To follow _all_ of these steps, you'll need to [fork the repository] first).
 
 1. Clone the repository:
-  `git clone git@github.com:ctorgalson/deploy-everywhere.git`
+
+    `git clone git@github.com:ctorgalson/deploy-everywhere.git`
+
+2. Enable `pre-push` githook (optional; see more about what this does [below](#requirements)):
+
+    `cd deploy-everywhere && ln -s .githooks/pre-push .git/hooks/pre-push`
+
 2. Change to the repo directory and create Ansible vault password file:
-  `cd deploy-everywhere && echo 'deploy-everywhere' > .deploy-vault`
+
+    `cd deploy-everywhere && echo 'deploy-everywhere' > .deploy-vault`
+
 3. Boot servers (and auto-provision and deploy `dev`):
-  `cd devops && vagrant up`
+
+    `cd devops && vagrant up`
+
 4. Run provisioning and initial deployment to `prod`:
-  `ansible-playbook deployment.yml --limit=deploy_prod`
+
+    `ansible-playbook deployment.yml --limit=deploy_prod`
+
 5. Get some work done:
     1. Checkout a new branch:
-      `git checkout -b newbranch`
+
+        `git checkout -b newbranch`
+
     2. Change to the site directory and start the `gulp watch` task:
-      `cd ../site && npx gulp watch`
+
+        `cd ../site && npx gulp watch`
+
     3. Make changes in `site/`,
     4. Commit changes:
-      `git commit -am 'Committing changes to demo repo.'`
+
+        `git commit -am 'Committing changes to demo repo.'`
+
     5. Run deployment test and push changes to remote repo:
-      `git push origin newbranch`
+
+        `git push origin newbranch`
+
 6. Deploy changes to `prod`:
-  `ansible-playbook deployment.yml --limit=deploy_prod --tags=deploy`
+
+    `ansible-playbook deployment.yml --limit=deploy_prod --tags=deploy`
 
 ## The servers
 
@@ -160,6 +181,12 @@ VAT=deploy vagrant up --provision dev
 VAT=deploy vagrant provision
 ```
 
+## Githooks
+
+This repository includes a directory, [.githooks] that contains a `pre-push` Git hook. [Git hooks] are generally scripts that correspond to a particular git command (`git push` in this instance), run when that command is issued, and cause the command to fail or continue.
+
+The `pre-push` hook in this repo will only allow the `push` operation to succeed if the current codebase can be successfully deployed to the `dev` server.
+
 [Vagrant]: https://www.vagrantup.com/
 [Ansible]: https://www.ansible.com/
 [VirtualBox]: https://www.virtualbox.org/
@@ -169,3 +196,5 @@ VAT=deploy vagrant provision
 [Vagrantfile]: https://github.com/ctorgalson/deploy-everywhere/blob/master/devops/Vagrantfile
 [hosts.yml]: https://github.com/ctorgalson/deploy-everywhere/blob/master/devops/hosts.yml
 [deployment.yml]: https://github.com/ctorgalson/deploy-everywhere/blob/master/devops/deployment.yml
+[.githooks]: https://github.com/ctorgalson/deploy-everywhere/blob/master/.githooks
+[Git hooks]: https://git-scm.com/book/en/v2/Customizing-Git-Git-Hooks
