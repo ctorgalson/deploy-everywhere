@@ -43,7 +43,7 @@ You may begin working immediately :)
 
     `git clone git@github.com:ctorgalson/deploy-everywhere.git`
 
-2. Enable `pre-push` githook (optional; see more about what this does [below](#requirements)):
+2. Enable `pre-push` githook (optional; see more about what this does [below](#githooks)):
 
     `cd deploy-everywhere && ln -s .githooks/pre-push .git/hooks/pre-push`
 
