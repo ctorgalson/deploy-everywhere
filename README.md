@@ -4,7 +4,7 @@ This repository uses [Ansible] and [Vagrant] to demonstrate how a single build a
 
 ## Requirements
 
-The minimum set of requirements to run the VMs and playbooks in this repository are:
+The minimum requirements to run the VMs and playbooks in this repository are:
 
 - [Ansible]
 - [Vagrant]
