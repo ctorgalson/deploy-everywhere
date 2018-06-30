@@ -11,7 +11,7 @@
 
   tasks:
     - name: Run server provisioning tasks.
-      include_tasks: "tasks/provision-hosts.yml"
+      import_tasks: "tasks/provision-hosts.yml"
 
 # Deploy application to hosts.
 - name: Deploy application.
@@ -24,4 +24,4 @@
 
   tasks:
     - name: Run application deployment tasks.
-      include_tasks: "tasks/deploy-app.yml"
+      import_tasks: "tasks/deploy-app.yml"
