@@ -1,7 +1,7 @@
 .deploy-vault
 .vagrant
 *.log
-app.css
 index.html
 node_modules
 roles
+site/docroot/css/*
