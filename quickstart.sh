@@ -4,6 +4,9 @@ set -e
 
 BASE=$PWD
 
+# Note that Vagrantfile would still work at the root of the repo, but we stuck
+# it in the devops/ directory just to be tidy.
+
 # Dev server can be provisioned _and_ deployed by `vagrant provision`.
 cd "$BASE/devops"
 echo "deploy everywhere" > .deploy-vault
